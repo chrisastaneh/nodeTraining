@@ -2,7 +2,7 @@ var routes = require('express').Router();
 var db = require('../dao/db');
 var bookDao = require('../dao/bookDao');
 
-routes.get('/books',function(req,res){
+routes.get('/book',function(req,res){
     bookDao.getAllBooks(function(error, result){
       if(error) throw error;
       res.setHeader('Content-Type', 'application/json');
@@ -10,7 +10,7 @@ routes.get('/books',function(req,res){
     });
 });
 
-routes.put('/books', function(req, res){
+routes.post('/book', function(req, res){
   var book = req.body;
   bookDao.addBook(book, function(err, result){
     if(err){
@@ -23,7 +23,7 @@ routes.put('/books', function(req, res){
 
 });
 
-routes.delete('/books/:id', function(req, res){
+routes.delete('/book/:id', function(req, res){
   bookDao.removeBook(req.params.id, function(err, result){
     if(err){
       res.status(400);
